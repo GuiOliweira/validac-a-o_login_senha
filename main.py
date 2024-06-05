@@ -1,5 +1,4 @@
 import mysql.connector
-from getpass import getpass  # Para ocultar a senha durante a digitação
 
 # Função para conectar ao banco de dados
 
@@ -42,7 +41,7 @@ def criar_login():
     cursor = connection.cursor()
 
     usuario = input("Digite o nome de usuário que deseja criar: ")
-    senha = getpass("Digite a senha que deseja criar: ")
+    senha = input("Digite a senha que deseja criar: ")
 
     query = "INSERT INTO users (username, password) VALUES (%s, %s)"
     cursor.execute(query, (usuario, senha))
@@ -79,7 +78,7 @@ def validar_login(usuario, senha):
 def main():
     while True:
         usuario = input("Digite seu nome de usuário: ")
-        senha = getpass("Digite sua senha: ")
+        senha = input("Digite sua senha: ")
         break
 
     if validar_login(usuario, senha):
@@ -91,11 +90,11 @@ def main():
         nova_tentativa_user = input(
             "Deseja tentar novamente?  S/N    : ").upper().split()[0]
         if nova_tentativa_user == "S":
-            print("-"*len(usuario))
+            print("-"*40)
             main()
             break
         elif nova_tentativa_user == "N":
-            print("-"*len(usuario))
+            print("-"*40)
             menu()
         else:
             print("\nOpção inválida, tente novamente...\n")
